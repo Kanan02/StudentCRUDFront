@@ -26,13 +26,14 @@ export class EditStudentComponent implements OnInit {
   }
   getStudentDetailById() {
     this.httpProvider.getStudentDetailById(this.studentId).subscribe((data: any) => {
-      if (data != null && data.result != null) {
-        var resultData = data.result.response;
+      if (data != null && data.body.result != null) {
+        var resultData = data.body.result.response;
         if (resultData) {
           this.editStudentForm.Id = resultData.id;
           this.editStudentForm.FullName = resultData.fullName;
           this.editStudentForm.Average = resultData.average;
-          this.editStudentForm.DateOfBirth = resultData.dateOfBirth;
+          this.editStudentForm.DateOfBirth =new Date(resultData.dateOfBirth).toISOString().substring(0, 10) ;
+          console.log( this.editStudentForm)
         }
       }
     },
@@ -43,9 +44,9 @@ export class EditStudentComponent implements OnInit {
     this.isSubmitted = true;
     if (isValid) {
       this.httpProvider.updateStudent(this.editStudentForm).subscribe(async data => {
-        if (data != null && data.result != null) {
-          var resultData = data.result;
-          if (resultData != null) {
+        if (data != null && data.body.result != null) {
+          var resultData = data.body;
+          if (resultData != null && !resultData.isError) {
               this.toastr.success(resultData.message);
               setTimeout(() => {
                 this.router.navigate(['/Home']);

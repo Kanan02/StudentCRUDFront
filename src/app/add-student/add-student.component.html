@@ -33,7 +33,7 @@
                 <label for="DateOfBirth" class="p-t-b-10">Date Of Birth<span class="requiredStar">*</span></label>
               </div>
               <div class="col-sm-9">
-                <input type="date" class="form-control" id="DateOfBirth" required maxlength="255"
+                <input type="date" class="form-control" id="DateOfBirth" required
                   [(ngModel)]="addStudentForm.DateOfBirth" name="DateOfBirth" #DateOfBirth="ngModel">
                 <div *ngIf="DateOfBirth.errors && isSubmitted" class="alert alert-danger validationError">
                   <div [hidden]="!DateOfBirth.errors?.['required']">

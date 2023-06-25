@@ -36,6 +36,11 @@ const MODALS: { [name: string]: Type<any> } = {
 export class HomeComponent implements OnInit {
   closeResult = '';
   studentList: any = [];
+  filterObject:any={
+    page: 1,
+    limit:10,
+    fullName:""
+  }
   constructor(private router: Router, private modalService: NgbModal,
     private toastr: ToastrService, private httpProvider : HttpProviderService) { }
 
@@ -43,9 +48,11 @@ export class HomeComponent implements OnInit {
     this.getAllStudent();
   }
   async getAllStudent() {
-    this.httpProvider.getAllStudent().subscribe((data : any) => {
-      if (data != null && data.result != null) {
-        var resultData = data.result.response.items;
+    this.httpProvider.getAllStudent(this.filterObject.page,this.filterObject.limit,this.filterObject.fullName).subscribe((data : any) => {
+      if (data != null && data.body != null) {
+        var resultData = data.body.result.response.items;
+        console.log(this.filterObject)
+        console.log(resultData)
         if (resultData) {
           this.studentList = resultData;
         }
@@ -61,7 +68,14 @@ export class HomeComponent implements OnInit {
         }
       });
   }
-
+  onPrevious() {
+    this.filterObject.page --;
+    this.getAllStudent();
+  }
+  onNext() {
+    this.filterObject.page ++;
+    this.getAllStudent();
+  }
   AddStudent() {
     this.router.navigate(['AddStudent']);
   }
@@ -79,8 +93,8 @@ export class HomeComponent implements OnInit {
   deleteStudent(student: any) {
     this.httpProvider.deleteStudentById(student.id).subscribe((data : any) => {
       if (data != null ) {
-        var resultData = data.result;
-        if (resultData != null) {
+        var resultData = data.body;
+        if (resultData.result != null) {
           this.toastr.success(resultData.message);
           this.getAllStudent();
         }

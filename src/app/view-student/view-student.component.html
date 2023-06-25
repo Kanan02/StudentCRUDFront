@@ -1,1 +1,40 @@
-<p>view-student works!</p>
+<div class="container-xl">
+    <div class="table-responsive">
+      <div class="table-wrapper">
+        <div class="table-title">
+          <div class="row">
+            <div class="col-sm-6">
+              <h4><b>View Student</b></h4>
+            </div>
+            <div class="col-sm-6">
+              <a href="#" routerLink="/Home" class="btn btn-success back"><i class="fas fa-arrow-circle-lef"></i>  Back</a>
+            </div>
+          </div>
+        </div>       
+        <table class="table table-striped table-hover table-bordered table-content">
+          <tbody>
+            <tr>
+              <td><label><b>Full Name</b></label></td>
+              <td><span>{{ studentDetail.fullName }}</span></td>
+            </tr>
+            <tr>
+              <td><label><b>Date Of Birth</b></label> </td>
+              <td><span>{{ studentDetail.dateOfBirth | date: "MM-dd-yyyy"  }}</span></td>
+            </tr>
+            <tr>
+              <td> <label><b>Average</b></label></td>
+              <td> <span>{{ studentDetail.average }}</span></td>
+            </tr>
+            <tr>
+              <td> <label><b>Created At</b></label></td>
+              <td><span>{{ studentDetail.createdAt | date: "MM-dd-yyyy HH:mm:ss" }}</span></td>
+            </tr>
+            <tr>
+              <td> <label><b>Updated At</b></label></td>
+              <td> <span>{{ studentDetail.updatedAt | date: "MM-dd-yyyy HH:mm:ss" }}</span></td>
+            </tr>
+          </tbody>
+        </table>       
+      </div>
+    </div>
+  </div>

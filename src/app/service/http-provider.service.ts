@@ -11,14 +11,17 @@ var httpLink = apiUrl+"/students";
 export class HttpProviderService {
   constructor(private webApiService: WebApiService) { }
 
-  public getAllStudent(): Observable<any> {
-    return this.webApiService.get(httpLink);
+  public getAllStudent(page:number,limit:number,fullName:string): Observable<any> {
+    if (!fullName) {
+      return this.webApiService.get(httpLink+'?Page='+page+'&Limit='+limit);
+    }
+    return this.webApiService.get(httpLink+'?FullName='+fullName+'&Page='+page+'&Limit='+limit);
   }
   public deleteStudentById(model: any): Observable<any> {
-    return this.webApiService.delete(httpLink + '?studentId=' + model);
+    return this.webApiService.delete(httpLink + '/' + model);
   }
   public getStudentDetailById(model: any): Observable<any> {
-    return this.webApiService.get(httpLink + '?employeeId=' + model);
+    return this.webApiService.get(httpLink + '/' + model);
   }
   public addStudent(model: any): Observable<any> {
     return this.webApiService.post(httpLink, model);
