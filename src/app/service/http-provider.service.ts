@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { WebApiService } from './web-api.service';
-import { apiUrl } from '../../environments/environment'
+import { apiUrl } from 'src/environments/environment';
 
 var httpLink = apiUrl+"/students";
 
