@@ -20,7 +20,10 @@ export class HttpProviderService {
   public getStudentDetailById(model: any): Observable<any> {
     return this.webApiService.get(httpLink + '?employeeId=' + model);
   }
-  public saveStudent(model: any): Observable<any> {
+  public addStudent(model: any): Observable<any> {
     return this.webApiService.post(httpLink, model);
+  }  
+  public updateStudent(model: any): Observable<any> {
+    return this.webApiService.put(httpLink, model);
   }  
 }                          
